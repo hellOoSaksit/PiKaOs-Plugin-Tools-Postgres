@@ -1,3 +1,5 @@
-sqlalchemy[asyncio]
-asyncpg
-pgvector
+# Pinned to the versions the kernel used to ship (before the build-merge cut) so the merged image is
+# byte-for-byte the same install. This tool CREATES the engine in-process → its libs bake into Core.
+sqlalchemy[asyncio]==2.0.51
+asyncpg==0.31.0
+pgvector==0.4.2
