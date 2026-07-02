@@ -1,16 +1,34 @@
-"""postgres — provides the DB connection as a DI contract (kernel-redesign seam-first).
+"""postgres — the Tool that CREATES the DB engine and provides it as a DI contract.
 
-Seam-first scope: SQLAlchemy still lives in the Core image and db.py still creates the engine; this
-plugin binds that engine + session factory into the container under `postgres.Connection`, the
-same way knowledge binds `knowledge.Retriever` — so a consumer running in the plugin lifecycle context
-(the worker today; the web app once it grows a container) resolves the connection through the contract
-instead of importing db.py globals. When postgres is later fully externalized, only this register() changes.
+The zero-datastore kernel owns no engine: SQLAlchemy left `app/core/db.py`, which is now just a
+sqlalchemy-free `get_db` seam resolving this contract. Here `register()` builds the async engine + session
+factory + pgvector codec (moved from the kernel, see `engine.py`) and binds them — plus an async `ping`
+probe so the kernel health router needs no sqlalchemy — under `postgres.Connection`.
+
+Every composition root (web lifespan · redis worker · scripts.migrate_plugins) registers this Tool and
+resolves `postgres.Connection` after registration; DB-owning plugins (auth/ai/knowledge/chat/telegram)
+declare `dependencies: ["postgres"]` so it registers first. Nothing has a DB unless this Tool is enabled.
 """
 from __future__ import annotations
 
 
 def register(ctx) -> None:
-    from ...core.db import engine, SessionLocal          # Core still owns creation for now
+    from ...core.config import settings
     from ...core.contracts import POSTGRES_CONNECTION
+    from .engine import create_engine, create_session_factory
 
-    ctx.container.bind(POSTGRES_CONNECTION, {"engine": engine, "session_factory": SessionLocal})
+    engine = create_engine(settings.database_url)
+    sf = create_session_factory(engine)
+
+    async def ping() -> bool:
+        """Health probe — SELECT 1 through the pool. Lets the kernel health router check the DB via the
+        contract instead of importing sqlalchemy."""
+        from sqlalchemy import text
+        async with sf() as s:
+            await s.execute(text("SELECT 1"))
+        return True
+
+    ctx.container.bind(POSTGRES_CONNECTION, {"engine": engine, "session_factory": sf, "ping": ping})
+
+
+__all__ = ["register"]
