@@ -1,0 +1,25 @@
+{
+  "languageCode": "en",
+  "lexiconCode": "formal",
+  "translations": {
+    "dbchoice.kicker": "First-run · Choose database",
+    "dbchoice.title": "Choose the system database",
+    "dbchoice.scopeNote": "This sets the system database for the whole platform — authentication, knowledge, AI and chat data all live here.",
+    "dbchoice.bundled": "Use the built-in database (recommended)",
+    "dbchoice.pg": "Connect an external PostgreSQL",
+    "dbchoice.supabase": "Connect Supabase",
+    "dbchoice.host": "Host",
+    "dbchoice.port": "Port",
+    "dbchoice.user": "Username",
+    "dbchoice.password": "Password",
+    "dbchoice.dbname": "Database name",
+    "dbchoice.connString": "Connection string (direct or session-mode, port 5432)",
+    "dbchoice.test": "Test connection",
+    "dbchoice.testing": "Testing…",
+    "dbchoice.ok": "Connected",
+    "dbchoice.failed": "Could not connect",
+    "dbchoice.save": "Save & continue",
+    "dbchoice.saved": "Saved — restart to apply",
+    "dbchoice.poolerWarn": "Use the direct/session-mode connection (port 5432), not the transaction pooler (6543)."
+  }
+}
