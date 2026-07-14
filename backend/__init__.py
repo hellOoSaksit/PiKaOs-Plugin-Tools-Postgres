@@ -15,9 +15,11 @@ from __future__ import annotations
 def register(ctx) -> None:
     from ...core.config import settings
     from ...core.contracts import POSTGRES_CONNECTION
+    from ...core import db_config
     from .engine import create_engine, create_session_factory
 
-    engine = create_engine(settings.database_url)
+    dsn = db_config.read_dsn() or settings.database_url      # Step-1 choice first → env fallback
+    engine = create_engine(dsn)
     sf = create_session_factory(engine)
 
     async def ping() -> bool:
