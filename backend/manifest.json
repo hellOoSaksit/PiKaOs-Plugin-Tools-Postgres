@@ -8,7 +8,7 @@
   "consumes": [],
   "dependencies": [],
   "permissions": [],
-  "routes": [],
+  "routes": ["/api/postgres"],
   "secrets": ["database_url"],
   "compose": "compose.fragment.yml"
 }

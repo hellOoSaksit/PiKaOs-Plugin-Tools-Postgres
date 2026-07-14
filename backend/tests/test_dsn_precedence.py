@@ -12,7 +12,7 @@ def _ctx_stub():
 
 def test_register_prefers_kernel_state_dsn_over_env(monkeypatch):
     seen = {}
-    monkeypatch.setattr("app.core.db_config.read_dsn", lambda: "postgresql+asyncpg://k:k@kernel:5432/k")
+    monkeypatch.setattr("app.plugins.postgres.db_config.read_dsn", lambda: "postgresql+asyncpg://k:k@kernel:5432/k")
     monkeypatch.setattr("app.plugins.postgres.engine.create_engine", lambda dsn: seen.setdefault("dsn", dsn))
     monkeypatch.setattr("app.plugins.postgres.engine.create_session_factory", lambda e: None)
     from app.plugins.postgres import register
@@ -23,7 +23,7 @@ def test_register_prefers_kernel_state_dsn_over_env(monkeypatch):
 
 def test_register_falls_back_to_env_when_unconfigured(monkeypatch):
     seen = {}
-    monkeypatch.setattr("app.core.db_config.read_dsn", lambda: None)
+    monkeypatch.setattr("app.plugins.postgres.db_config.read_dsn", lambda: None)
     monkeypatch.setattr("app.core.config.settings.database_url", "postgresql+asyncpg://e:e@env:5432/e", raising=False)
     monkeypatch.setattr("app.plugins.postgres.engine.create_engine", lambda dsn: seen.setdefault("dsn", dsn))
     monkeypatch.setattr("app.plugins.postgres.engine.create_session_factory", lambda e: None)
