@@ -4,8 +4,10 @@ services:
     image: pgvector/pgvector:pg16
     env_file:
       - ../Backend/.env
-    ports:
-      - "5432:5432"
+    # internal-by-default (Fix-KIT-07): the backend reaches this over the compose network as `db:5432`,
+    # so NO host port is published. If a dev workflow needs host access, add one allocated from the
+    # registry (PiKaOs-Docs/docs/architecture/ports.md) — never hardcode it here. Prod external exposure
+    # is a host-firewall decision, not a loopback bind (Fix-NET-01).
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
