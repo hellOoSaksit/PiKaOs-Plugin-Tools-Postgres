@@ -2,7 +2,7 @@
    verified bootstrap Bearer (FirstRun's onVerified stored it via setToken()) but the system has no
    DB configured yet (`/api/postgres/db-status` → needsDbConfig, merged into App's bootstrap state).
    The operator picks Bundled / external Postgres / Supabase, tests connectivity, then saves — same
-   chrome/props/error-pattern as Core's FirstAdmin.jsx, same bootstrap-token transport (raw() already
+   chrome/props/error-pattern as the auth plugin's FirstAdmin.jsx, same bootstrap-token transport (raw() already
    attaches the in-memory token, see Core's api.js's dbTest/dbConfig, which now hit the routes this
    plugin owns: /api/postgres/db-test + /api/postgres/db-config). All copy via t(key)
    (dbchoice.* ×3 packs, shipped from this plugin's frontend/i18n/). Relocated from Core's
