@@ -18,6 +18,7 @@
     "dbchoice.testing": "Testing…",
     "dbchoice.ok": "Connected",
     "dbchoice.failed": "Could not connect",
+    "dbchoice.errNetwork": "Cannot reach the server.",
     "dbchoice.save": "Save & continue",
     "dbchoice.saved": "Saved — restart to apply",
     "dbchoice.poolerWarn": "Use the direct/session-mode connection (port 5432), not the transaction pooler (6543)."

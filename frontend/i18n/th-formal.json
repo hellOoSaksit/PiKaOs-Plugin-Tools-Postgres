@@ -18,6 +18,7 @@
     "dbchoice.testing": "กำลังทดสอบ…",
     "dbchoice.ok": "เชื่อมต่อสำเร็จ",
     "dbchoice.failed": "เชื่อมต่อไม่สำเร็จ",
+    "dbchoice.errNetwork": "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้",
     "dbchoice.save": "บันทึกและดำเนินการต่อ",
     "dbchoice.saved": "บันทึกแล้ว — ต้องรีสตาร์ทเพื่อให้มีผล",
     "dbchoice.poolerWarn": "ใช้การเชื่อมต่อแบบ direct หรือ session-mode (พอร์ต 5432) ไม่ใช่ transaction pooler (พอร์ต 6543)"

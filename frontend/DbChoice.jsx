@@ -48,7 +48,7 @@ export function DbChoice({ t, language, onLang }) {
       setTestState('ok');
     } catch (err) {
       setTestState('failed');
-      setError(err.status === 0 ? t('firstadmin.errNetwork') : t('dbchoice.failed'));
+      setError(err.status === 0 ? t('dbchoice.errNetwork') : t('dbchoice.failed'));
     }
   };
 
@@ -61,7 +61,7 @@ export function DbChoice({ t, language, onLang }) {
       await api.dbConfig(payload());
       setSaved(true);
     } catch (err) {
-      setError(err.status === 0 ? t('firstadmin.errNetwork') : t('dbchoice.failed'));
+      setError(err.status === 0 ? t('dbchoice.errNetwork') : t('dbchoice.failed'));
     } finally {
       setSaving(false);
     }

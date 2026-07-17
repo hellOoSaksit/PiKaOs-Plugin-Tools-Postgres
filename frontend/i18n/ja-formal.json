@@ -18,6 +18,7 @@
     "dbchoice.testing": "テスト中…",
     "dbchoice.ok": "接続しました",
     "dbchoice.failed": "接続できませんでした",
+    "dbchoice.errNetwork": "サーバーに接続できません。",
     "dbchoice.save": "保存して続行",
     "dbchoice.saved": "保存しました — 反映にはサーバーの再起動が必要です",
     "dbchoice.poolerWarn": "トランザクションプーラー（ポート 6543）ではなく、direct または session-mode の接続（ポート 5432）を使用してください。"
